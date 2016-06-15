@@ -1,0 +1,12 @@
+<form method="post" action="//Localhost/Blog_Anna_molibog/admin.php">
+    <div class="form-group">
+        <input name="id" type="hidden" class="form-control" placeholder="Title" value="<?=$currentArticle[0]['id']?>">
+    </div>
+    <div class="modal-body">
+        Вы уверены, что хотите удалить данный пост?
+    </div>
+    <div class="modal-footer" style="text-align: center">
+        <button type="submit" class="btn btn-primary" name="delete">Удалить</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+    </div>
+</form>

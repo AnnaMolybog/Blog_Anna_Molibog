@@ -1,0 +1,81 @@
+<?php
+include "partials/header.phtml";
+?>
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-3">
+            <div class="list-group">
+                <a href="//Localhost/Blog_Anna_Molibog/admin.php" class="list-group-item">Все статьи</a>
+                <?php foreach ($categories as $category) { ?>
+                    <a href="//Localhost/Blog_Anna_Molibog/admin.php?id_category=<?=$category['id_category']?><?php if(isset($_GET['id_tag'])) { ?>&id_tag=<?=$_GET['id_tag']?><?php } ?><?php if(isset($_GET['page'])) { ?>&page=<?=$_GET['page']?><?php } ?>" class="list-group-item"><?=$category['category']?></a>
+                <?php } ?>
+            </div>
+        </div>
+
+            <div class="col-lg-9 col-md-9 col-sm-9">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <?php foreach($allTags as $tag) { ?>
+                            <a href="//Localhost/Blog_Anna_Molibog/admin.php?id_tag=<?=$tag['id_tag']?><?php if(isset($_GET['id_category'])) { ?>&id_category=<?=$_GET['id_category']?><?php } ?><?php if(isset($_GET['page'])) { ?>&page=<?=$_GET['page']?><?php } ?>"><?php echo "#" . $tag['tag_name'];?></a>
+                        <?php }?>
+                    </div>
+                </div>
+                <?php foreach ($articles as $article) {?>
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        <img class="img-circle" width="200" height="200" src="//Localhost/Blog_Anna_Molibog/uploads/<?=$article['image']?>" style="float: left">
+                    </div>
+                    <div class="col-lg-7 col-md-7 col-sm-7">
+                        <h3><a href = "//Localhost/Blog_Anna_Molibog/article.php?id=<?=$article['id']?>"><?=$article['title']?></a></h3>
+                        <em><?=$article['date']?></em>
+                        <p><?=formatArticle($article['content']);?><a href = "//Localhost/Blog_Anna_Molibog/article.php?id=<?=$article['id']?>">...</a></p>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2" style="margin-top: 60px">
+
+                        <button type="button" class="btn btn-default btn-sm btn-block" name="editModal">
+                            <a data-toggle="modal" data-target="#editModal" href="//Localhost/Blog_Anna_Molibog/admin.php?id_edit=<?=$article['id']?>">Редактировать</a>
+                        </button>
+
+                        <div class="modal fade bs-example-modal-lg" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editLabel">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="editLabel">Редактировать</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><br>
+                        <button type="button" class="btn btn-danger btn-sm btn-block">
+                        <a data-toggle="modal" data-target="#deleteModal" href="//Localhost/Blog_Anna_molibog/admin.php?id_delete=<?=$article['id']?>">
+                            Удалить
+                        </a>
+                        </button>
+                        <div class="modal fade bs-example-modal-sm" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteLabel">
+                            <div class="modal-dialog modal-sm" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="deleteLabel">Удаление</h4>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><hr>
+                <?php } ?>
+            </div>
+
+
+        <nav style="text-align: center">
+            <ul class="pagination">
+                <?php for ($i = 1; $i <= $pages; $i++) {?>
+                <li><a href="//Localhost/Blog_Anna_Molibog/admin.php?page=<?=$i?><?php if(isset($_GET['id_tag'])) {?>&id_tag=<?=$tag['id_tag']?><?php } ?><?php if(isset($_GET['id_category'])) { ?>&id_category=<?=$_GET['id_category']?><?php }?>"><?=$i?></a></li>
+                <?php }?>
+            </ul>
+        </nav>
+
+    </div>
+<?php
+include "partials/footer.phtml";
+?>

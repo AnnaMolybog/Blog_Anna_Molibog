@@ -1,0 +1,48 @@
+<?php
+include "partials/header.phtml";
+?>
+    <div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-3">
+        <div class="list-group">
+            <a href="//Localhost/Blog_Anna_Molibog/index.php" class="list-group-item">Все статьи</a>
+            <?php foreach ($categories as $category) { ?>
+                <a href="//Localhost/Blog_Anna_Molibog/index.php?id_category=<?=$category['id_category']?><?php if(isset($_GET['id_tag'])) { ?>&id_tag=<?=$_GET['id_tag']?><?php } ?><?php if(isset($_GET['page'])) { ?>&page=<?=$_GET['page']?><?php } ?>" class="list-group-item"><?=$category['category']?></a>
+            <?php } ?>
+        </div>
+    </div>
+        <div class="col-lg-9 col-md-9 col-sm-9">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <?php foreach($allTags as $tag) { ?>
+                        <a href="//Localhost/Blog_Anna_Molibog/index.php?id_tag=<?=$tag['id_tag']?><?php if(isset($_GET['id_category'])) { ?>&id_category=<?=$_GET['id_category']?><?php } ?><?php if(isset($_GET['page'])) { ?>&page=<?=$_GET['page']?><?php } ?>"><?php echo "#" . $tag['tag_name'];?></a>
+                    <?php }?>
+                </div>
+            </div>
+            <?php foreach ($articles as $article) {?>
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        <img class="img-circle" width="200" height="200" src="//Localhost/Blog_Anna_Molibog/uploads/<?=$article['image']?>" style="float: left">
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9">
+                        <h3><a href = "//Localhost/Blog_Anna_Molibog/article.php?id=<?=$article['id']?>"><?=$article['title']?></a></h3>
+                        <em><?=$article['date']?></em>
+                        <p><?=formatArticle($article['content']);?><a href = "//Localhost/Blog_Anna_Molibog/article.php?id=<?=$article['id']?>">...</a></p>
+                    </div>
+                </div><hr>
+            <?php } ?>
+        </div>
+
+
+        <nav style="text-align: center">
+            <ul class="pagination">
+                <?php for ($i = 1; $i <= $pages; $i++) {?>
+                    <li><a href="//Localhost/Blog_Anna_Molibog/index.php?page=<?=$i?><?php if(isset($_GET['id_tag'])) {?>&id_tag=<?=$tag['id_tag']?><?php } ?><?php if(isset($_GET['id_category'])) { ?>&id_category=<?=$_GET['id_category']?><?php }?>"><?=$i?></a></li>
+                <?php }?>
+            </ul>
+        </nav>
+        </div>
+
+
+<?php
+include "partials/footer.phtml";
+?>

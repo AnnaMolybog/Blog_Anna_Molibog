@@ -1,1 +1,1 @@
-# Blog_Anna_Molibog
+# PHP practive: Blog using mvc
